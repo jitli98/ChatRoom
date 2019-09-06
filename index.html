@@ -49,7 +49,7 @@
                 socket.emit('new user', userName); 
             })
             socket.on('new user', (msg) => {
-                $('#messages').append($('<li>').text(`${msg} has entered the chat.`));
+                $('#messages').append(`<li>${msg} has entered the chat.</li>`);
             });
             
             // handles functionality when user sends a message
@@ -59,12 +59,12 @@
                 $('#message').val('');
             });
             socket.on('chat message', (msg) => {
-                $('#messages').append($('<li>').text(msg));
+                $('#messages').append(`<li><b>${msg.author}</b>: ${msg.message} <sub>${msg.time}</sub></li>`);
             });
 
             // handles functionality when user exits the chat room
             socket.on('leave room', (msg) => {
-                $('#messages').append($('<li>').text(`${msg} left the chat.`));
+                $('#messages').append(`<li>${msg} left the chat.</li>`);
             });
 
         }); 

@@ -16,7 +16,15 @@ io.on('connect', (socket) => {
 
     // Handles messages in the chatroom
     socket.on('chat message', (msg) => {
-        io.emit('chat message', msg);   
+        // socket.broadcast.to(id).emit('my message', msg);
+        const now = new Date();
+        const formattedTime = formatTime(now);
+        const time = formattedTime.hour + ":" + formattedTime.minute + ":" + formattedTime.second;
+        io.emit('chat message', {
+            message: msg,
+            author: socket.username,
+            time: time
+        });   
     });
 
     // Broadcast message to all users when someone leaves the chat
@@ -29,3 +37,17 @@ const port = 3000;
 http.listen(port, () => {
     console.log(`App is running on port ${port}......`);
 })
+
+formatTime = (date) => {
+    let addZero = (i) => i < 10 ? "0" + i : i; 
+    let h = addZero(date.getHours());
+    let m = addZero(date.getMinutes());
+    let s = addZero(date.getSeconds());
+    return {
+        hour: h,
+        minute: m,
+        second: s
+    }
+}
+
+  
