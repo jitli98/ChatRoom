@@ -35,39 +35,6 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(() => {
-            const socket = io();
-            let userName = "";
-
-            // handles functionality when users signs in to the chat room
-            $("#sign-in form").submit((e) => {
-                e.preventDefault();
-                $('#sign-in').addClass('hide');
-                $('#chat-room').removeClass('hide');
-                userName = $('#chat-name').val().trim();
-                socket.emit('new user', userName); 
-            })
-            socket.on('new user', (msg) => {
-                $('#messages').append(`<li>${msg} has entered the chat.</li>`);
-            });
-            
-            // handles functionality when user sends a message
-            $("#chat-room form").submit((e) => {
-                e.preventDefault(); // prevents the page from refreshing when submitting forms
-                socket.emit('chat message', $('#message').val());
-                $('#message').val('');
-            });
-            socket.on('chat message', (msg) => {
-                $('#messages').append(`<li><b>${msg.author}</b>: ${msg.message} <sub>${msg.time}</sub></li>`);
-            });
-
-            // handles functionality when user exits the chat room
-            socket.on('leave room', (msg) => {
-                $('#messages').append(`<li>${msg} left the chat.</li>`);
-            });
-
-        }); 
-    </script>
+    <script src='./script.js'></script>
 </body>
 </html>
