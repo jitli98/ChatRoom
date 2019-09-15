@@ -31,9 +31,10 @@ io.on('connect', (socket) => {
     // Saves message to the database
     socket.on('chat message', (msg) => {
         // socket.broadcast.to(id).emit('my message', msg);
-        const now = new Date();
-        const formattedTime = formatTime(now);
-        const time = formattedTime.hour + ":" + formattedTime.minute + ":" + formattedTime.second;
+        // const now = new Date();
+        // const formattedTime = formatTime(now);
+        // const time = formattedTime.hour + ":" + formattedTime.minute + ":" + formattedTime.second;
+        const time = new Date();
         const messageObject = {
             message: msg,
             author: socket.username,
@@ -41,7 +42,6 @@ io.on('connect', (socket) => {
         };
         Message.create(messageObject, (err, data) => {
             if (err) throw new Error('Failed to save message in Database');
-            console.log(data);
         });
         io.emit('chat message', messageObject);   
     });
@@ -74,17 +74,6 @@ http.listen(port, () => {
 })
 
 /**** Helper Functions ****/
-formatTime = (date) => {
-    let addZero = (i) => i < 10 ? "0" + i : i; 
-    let h = addZero(date.getHours());
-    let m = addZero(date.getMinutes());
-    let s = addZero(date.getSeconds());
-    return {
-        hour: h,
-        minute: m,
-        second: s
-    }
-}
 
 populateChat = async () => {
     try {
@@ -96,7 +85,6 @@ populateChat = async () => {
 }
 
 
-//TODO: Include functionality that populates the webpage with existing messages fron the database if there are any.
-  
+
 //TODO: Write a method that checks the database if there are more than 50 words
 // If there are, remove the earliest message sent and add the current message to the database.

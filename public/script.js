@@ -4,13 +4,15 @@ $(document).ready(() => {
 
     // handles functionality to populate chat with messages stored in database
     socket.on('populate chat', (messages) => {
-        console.log(messages);
-        messages.forEach((msg) => sendMessage(`<li><b>${msg.author}</b>: ${msg.message} <sub>${msg.time}</sub></li>`));
+        for (msg of messages) {
+            console.log(msg);
+            let time = new Date(msg.time);
+            sendMessage(`<li><b>${msg.author}</b>: ${msg.message} <sub>${formatTime(time)}</sub></li>`);
+        }
     })
 
     // handles functionality when users signs in to the chat room
     $('#sign-in form').submit((e) => {
-        console.log('test');
         e.preventDefault();
         $('#sign-in').addClass('hide');
         $('#chat-room').removeClass('hide');
@@ -28,7 +30,8 @@ $(document).ready(() => {
         $('#message').val('');
     });
     socket.on('chat message', (msg) => {
-        sendMessage(`<li><b>${msg.author}</b>: ${msg.message} <sub>${msg.time}</sub></li>`);
+        let time = new Date(msg.time);
+        sendMessage(`<li><b>${msg.author}</b>: ${msg.message} <sub>${formatTime(time)}</sub></li>`);
     });
 
     // handles functionality when user exits the chat room
@@ -49,4 +52,14 @@ function sendMessage(msg) {
         // Scroll to bottom
         messages.scrollTop = messages.scrollHeight;
     }
+}
+
+// TODO: 
+// Arrange the messages by date
+formatTime = (date) => {
+    let addZero = (i) => i < 10 ? "0" + i : i; 
+    let h = addZero(date.getHours());
+    let m = addZero(date.getMinutes());
+    let s = addZero(date.getSeconds());
+    return `${h}:${m}:${s}`;
 }
