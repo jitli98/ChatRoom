@@ -9,7 +9,17 @@
   "author": "Jit Gan",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "cookies": "^0.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
-    "socket.io": "^2.2.0"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.1",
+    "path": "^0.12.7",
+    "socket.io": "^2.2.0",
+    "validator": "^11.1.0"
   }
 }
