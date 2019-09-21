@@ -3,7 +3,7 @@ This is a ChatRoom implemented using Socket.io and Express. It also features use
 
 ### How to use ChatRoom?
 
-1. Visit the https://jitchatroom.herokuapp.com/ directory and sign in. 
+1. Visit https://jitchatroom.herokuapp.com/ and sign in. 
 >If you are new, a new account would be created as you sign in. (provided that the username hasn't already been used)
     
 2. Start Chatting Away!
