@@ -19,7 +19,9 @@ $(document).ready(() => {
     // handles functionality when user sends a message
     $('#chat-room form').submit((e) => {
         e.preventDefault(); // prevents the page from refreshing when submitting forms
-        socket.emit('chat message', $('#message').val());
+        if (!($('#message').val() === '')) {
+            socket.emit('chat message', $('#message').val());
+        }
         $('#message').val('');
     });
     socket.on('chat message', (msg) => {
