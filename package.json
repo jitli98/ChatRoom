@@ -10,7 +10,7 @@
   "author": "Jit Gan",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "cookies": "^0.7.3",
